@@ -56,7 +56,7 @@ const getAllEvents = async (req, res) => {
 const getEventsByPlanner = async (req, res) => {
     try {
         const { accountId, category } = req.query;
-        if(category != undefined || category != null || category != "") {
+        if(category != undefined) {
               return Event.find({ "header.accountId": accountId, "event.type": category })
                  .select({ __v: 0 }) // Do not return _id and __v
                  .then((value) => res.status(200).json(value))
