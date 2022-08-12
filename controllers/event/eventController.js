@@ -53,6 +53,17 @@ const getAllEvents = async (req, res) => {
     }
 };
 
+const getEventsByPlanner = async (req, res) => {
+    try {
+        const { accountId, category } = req.query;
+        return Event.find({ "header.accountId": accountId, "event.type": category })
+            .select({ __v: 0 }) // Do not return _id and __v
+             .then((value) => res.status(200).json(value))
+             .catch((err) => res.status(400).json(err));
+    } catch (error) {
+        console.error(error);
+    }
+}
 const getEvents = async (req, res) => {
     try {
         const { accountId, latitude, longitude, sortBy } = req.query;
@@ -132,6 +143,7 @@ module.exports = {
     createEvent,
     getEvents,
     getAllEvents,
+    getEventsByPlanner,
     updateEvent,
     deleteEvent
 
