@@ -62,7 +62,7 @@ const getEventsByPlanner = async (req, res) => {
                  .then((value) => res.status(200).json(value))
                  .catch((err) => res.status(400).json(err));
         }
-        return Event.find({ "header.accountId": accountId, "event.type": category })
+        return Event.find({ "header.accountId": accountId})
              .select({ __v: 0 }) // Do not return _id and __v
              .then((value) => res.status(200).json(value))
              .catch((err) => res.status(400).json(err));
