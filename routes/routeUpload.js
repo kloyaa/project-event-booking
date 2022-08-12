@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/img", (req, res) => {
+router.post("/img", async (req, res) => {
   try {
     const accountId = req.body.accountId;
     const filePath = req.file.path;
