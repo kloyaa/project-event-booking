@@ -25,6 +25,7 @@ try {
   app.use("/api", require("./routes/routeTicket"));
   app.use("/api", require("./routes/routeNotifications"));
   app.use("/api", require("./routes/routeMonetization"));
+  app.use("/api", require("./routes/routeUpload"));
 
   app.listen(port, () => console.log(`SERVER IS RUNNING ON ${port}`));
 } catch (error) {
