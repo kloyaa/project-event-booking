@@ -1,6 +1,7 @@
 
 const express = require("express");
 const router = express.Router();
+const cloudinary = require("../services/img-upload/cloundinary");
 
 router.post("/img", async (req, res) => {
   try {
