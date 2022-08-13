@@ -18,6 +18,10 @@ const EventSchema = new Schema({
                 required: [true, "lastName is required"],
             },
         },
+              avatar: {
+                type: String,
+                required: [true, "avatar is required"],
+            },
         address: {
             name: {
                 type: String,
