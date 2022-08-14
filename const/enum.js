@@ -4,7 +4,7 @@ const riderStatus = ["active", "inactive"];
 const messageTypes = ["billing", "message", "news"];
 const userRoles = ["customer", "planner"];
 const eventTypes = ["wedding", "kids-birthday-party", "adults-birthday-party", "disco", "casual-party"];
-const eventStatus = ["preparing", "completed", "cancelled"];
+const eventStatus = ["preparing", "in-progress", "completed", "cancelled"];
 const paymentType = ["card", "cash"];
 const paymentStatus = ["unpaid", "paid"];
 
