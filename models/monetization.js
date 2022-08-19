@@ -7,7 +7,7 @@ const TxnMonetizationSchema = new Schema({
         required: [true, "refNumber  is required"]
     },
     amount: {
-        type: Number,
+        type: String,
         required: [true, "amount is required"]
     },
     createdAt: {
