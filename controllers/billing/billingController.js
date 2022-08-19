@@ -7,11 +7,16 @@ const createBilling = async (req, res) => {
     try {
         const refNumber = uuidv4();;
         req.body.refNumber = refNumber;
-        TxnMonetization({ refNumber: refNumber, amount: req.body.content.amount * 0.02 }).save();
-        return new Billing(req.body)
-            .save()
-            .then((value) => res.status(200).json(value))
-            .catch((err) => res.status(400).json(err.errors));
+        
+        return Promise.all([
+            TxnMonetization({ refNumber: refNumber, amount: req.body.content.amount * 0.025 }).save(),
+            Billing(req.body).save()
+        ])
+        .then( ([ monetization, billing ]) => {
+          console.log({ monetization, billing);
+        });
+
+        
     } catch (error) {
         console.error(error);
     }
