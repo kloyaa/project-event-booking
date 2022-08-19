@@ -9,7 +9,7 @@ const createBilling = async (req, res) => {
         req.body.refNumber = refNumber;
         
         return Promise.all([
-            TxnMonetization({ refNumber: refNumber, amount: req.body.content.amount * 0.025 }).save(),
+            TxnMonetization({ refNumber: refNumber, amount: parseInt(req.body.content.amount) * 0.025 }).save(),
             Billing(req.body).save()
         ])
         .then(([monetization, billing]) => res.status(200).json({ monetization, billing}))
