@@ -52,7 +52,7 @@ const BillingSchema = new Schema({
             required: [true, "paymentDetails is required"],
         },
         amount: {
-            type: Number,
+            type: String,
             required: [true, "amount is required"]
         },
     },
