@@ -7,11 +7,7 @@ const createBilling = async (req, res) => {
     try {
         const refNumber = uuidv4();;
         req.body.refNumber = refNumber;
-        TxnMonetization({ refNumber: refNumber, amount: req.body.content.amount * 0.02 })
-            .save()
-            .then((value) => console.log(value))
-            .catch((err) => console.log(err));
-
+        TxnMonetization({ refNumber: refNumber, amount: req.body.content.amount * 0.02 }).save();
         return new Billing(req.body)
             .save()
             .then((value) => res.status(200).json(value))
