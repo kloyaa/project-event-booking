@@ -13,7 +13,7 @@ const createBilling = async (req, res) => {
             Billing(req.body).save()
         ])
         .then( ([ monetization, billing ]) => {
-          console.log({ monetization, billing);
+          console.log({ monetization, billing});
         });
 
         
