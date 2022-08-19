@@ -12,10 +12,8 @@ const createBilling = async (req, res) => {
             TxnMonetization({ refNumber: refNumber, amount: req.body.content.amount * 0.025 }).save(),
             Billing(req.body).save()
         ])
-        .then( ([ monetization, billing ]) => {
-          console.log({ monetization, billing});
-        });
-
+        .then(([monetization, billing]) => res.status(200).json({ monetization, billing}))
+        .catch((err) => res.status(400).json(err));
         
     } catch (error) {
         console.error(error);
