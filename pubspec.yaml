@@ -58,6 +58,7 @@ dependencies:
   dotted_border: ^2.0.0+2
   get: ^4.6.1
   google_fonts: ^2.3.1
+  url_launcher: ^6.1.5
   
   extended_masked_text: ^2.3.1
   flutter_masked_text2: ^0.9.1

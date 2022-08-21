@@ -182,7 +182,7 @@ class _ViewPlannerMainState extends State<ViewPlannerMain> {
           ListTile(
             onTap: () {},
             leading: const Icon(
-              AntDesign.message1,
+              AntDesign.mail,
               size: 20.0,
               color: kDark,
             ),

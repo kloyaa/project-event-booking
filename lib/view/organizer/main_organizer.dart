@@ -1,11 +1,20 @@
+import 'package:app/common/formatPrint.dart';
 import 'package:app/const/colors.dart';
+import 'package:app/controller/globalController.dart';
 import 'package:app/controller/profileController.dart';
 import 'package:app/controller/userController.dart';
+import 'package:app/widget/button.dart';
+import 'package:app/widget/dialog.dart';
+import 'package:app/widget/form.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewOrganizerMain extends StatefulWidget {
   const ViewOrganizerMain({Key? key}) : super(key: key);
@@ -16,8 +25,24 @@ class ViewOrganizerMain extends StatefulWidget {
 
 class _ViewOrganizerMainState extends State<ViewOrganizerMain> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  final _userCtrl = Get.put(UserController());
   final _profileCtrl = Get.put(ProfileController());
+  final _userCtrl = Get.put(UserController());
+  final _globalCtrl = Get.put(GlobalController());
+
+  late Future _gallery;
+
+  Future refresh() async {
+    setState(() {
+      _gallery = _profileCtrl.getGallery(_profileCtrl.profile["accountId"]);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _gallery = _profileCtrl.getGallery(_profileCtrl.profile["accountId"]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,14 +127,29 @@ class _ViewOrganizerMainState extends State<ViewOrganizerMain> {
           const Divider(),
           const Spacer(),
           ListTile(
-            onTap: () => {},
+            onTap: () => Get.toNamed("/view-gallery"),
             leading: const Icon(
-              Ionicons.add,
+              AntDesign.picture,
               size: 20.0,
               color: kDark,
             ),
             title: Text(
-              "Upload Images",
+              "Gallery",
+              style: GoogleFonts.roboto(
+                fontSize: 12.0,
+                color: kDark,
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () => Get.toNamed("/view-social-links"),
+            leading: const Icon(
+              AntDesign.link,
+              size: 20.0,
+              color: kDark,
+            ),
+            title: Text(
+              "Social Links",
               style: GoogleFonts.roboto(
                 fontSize: 12.0,
                 color: kDark,
@@ -119,7 +159,7 @@ class _ViewOrganizerMainState extends State<ViewOrganizerMain> {
           ListTile(
             onTap: () {},
             leading: const Icon(
-              AntDesign.message1,
+              AntDesign.mail,
               size: 20.0,
               color: kDark,
             ),
@@ -159,6 +199,155 @@ class _ViewOrganizerMainState extends State<ViewOrganizerMain> {
       appBar: appBar,
       drawer: drawer,
       backgroundColor: kLight,
+      body: Scrollbar(
+        child: FutureBuilder(
+          future: _gallery,
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.none) {
+              return SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    for (int i = 0; i < 5; i++)
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: Get.width,
+                            height: 220.0,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey.shade100,
+                              highlightColor: Colors.grey.shade200,
+                              enabled: true,
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  //borderRadius: kDefaultRadius,
+                                  color: kDark,
+                                ),
+                                width: 100.0,
+                                height: 220.0,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 45.0),
+                        ],
+                      )
+                  ],
+                ),
+              );
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    for (int i = 0; i < 5; i++)
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: Get.width,
+                            height: 220.0,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey.shade100,
+                              highlightColor: Colors.grey.shade200,
+                              enabled: true,
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  //borderRadius: kDefaultRadius,
+                                  color: kDark,
+                                ),
+                                width: 100.0,
+                                height: 220.0,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 45.0),
+                        ],
+                      )
+                  ],
+                ),
+              );
+            }
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.data.length == 0) {
+                return GestureDetector(
+                  onTap: () async => await refresh(),
+                  child: Scaffold(
+                    body: Center(
+                      child: Text(
+                        "Empty",
+                        style: GoogleFonts.roboto(
+                          color: kDark.withOpacity(0.8),
+                          fontSize: 11.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }
+            return RefreshIndicator(
+              onRefresh: () async => await refresh(),
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                shrinkWrap: true,
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, int index) {
+                  final id = snapshot.data[index]["id"];
+                  final img = snapshot.data[index]["url"];
+                  final dateUploaded =
+                      snapshot.data[index]["date"]["createdAt"];
+                  return GestureDetector(
+                    onTap: () {
+                      _globalCtrl.selectedPhoto = snapshot.data[index];
+                      Get.toNamed("/view-photo-preview");
+                    },
+                    child: Container(
+                      color: kWhite,
+                      child: Column(
+                        children: [
+                          Hero(
+                            tag: id,
+                            child: CachedNetworkImage(
+                              imageUrl: img,
+                              height: 220.0,
+                              width: Get.width,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      "Uploaded ${Jiffy(dateUploaded).fromNow()}",
+                                      style: GoogleFonts.roboto(
+                                        color: Colors.grey,
+                                        fontSize: 10,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(width: 10),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

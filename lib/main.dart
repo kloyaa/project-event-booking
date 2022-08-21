@@ -1,12 +1,14 @@
 import 'package:app/const/colors.dart';
 import 'package:app/view/account/login.dart';
 import 'package:app/view/account/registration.dart';
-import 'package:app/view/billing/pay.dart';
 import 'package:app/view/customer/main_customer.dart';
 import 'package:app/view/customer/sub/my_billings.dart';
 import 'package:app/view/customer/sub/my_bookings.dart';
 import 'package:app/view/loading.dart';
 import 'package:app/view/organizer/main_organizer.dart';
+import 'package:app/view/organizer/sub/gallery.dart';
+import 'package:app/view/organizer/sub/social_links.dart';
+import 'package:app/view/organizer/sub/sub/gallery_preview.dart';
 import 'package:app/view/planner/main_planner.dart';
 import 'package:app/view/planner/sub/create_events.dart';
 import 'package:app/view/planner/sub/my_billings.dart';
@@ -33,9 +35,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: kPrimary),
       initialRoute: "/login",
       getPages: [
-        GetPage(name: "/loading", page: () => const Loading()),
-        GetPage(name: "/login", page: () => const ViewLogin()),
-        GetPage(name: "/registration", page: () => const ViewRegistration()),
+        GetPage(
+          name: "/loading",
+          page: () => const Loading(),
+        ),
+        GetPage(
+          name: "/login",
+          page: () => const ViewLogin(),
+        ),
+        GetPage(
+          name: "/registration",
+          page: () => const ViewRegistration(),
+        ),
         GetPage(
           name: "/view-create-profile",
           page: () => const ViewCreateProfile(),
@@ -83,6 +94,17 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/view-txn-success",
           page: () => const ViewTxnSuccess(),
+        ),
+        GetPage(
+          name: "/view-social-links",
+          page: () => const ViewSocialLinks(),
+        ),
+        GetPage(
+          name: "/view-gallery",
+          page: () => const ViewGallery(),
+        ),   GetPage(
+          name: "/view-photo-preview",
+          page: () => const ViewGalleryPreview(),
         ),
       ],
     );

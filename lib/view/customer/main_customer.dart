@@ -536,7 +536,7 @@ class _ViewCustomerMainState extends State<ViewCustomerMain> {
           ListTile(
             onTap: () {},
             leading: const Icon(
-              AntDesign.message1,
+              AntDesign.mail,
               size: 20.0,
               color: kDark,
             ),

@@ -143,15 +143,15 @@ TextField inputTextArea({
   required color,
   required focusNode,
   maxLines = 4,
+  TextInputAction textInputAction = TextInputAction.newline,
 }) {
   return TextField(
-    style: textFieldStyle.copyWith(
-      fontWeight: FontWeight.w600,
-    ),
+    style: textFieldStyle,
     controller: controller,
     focusNode: focusNode,
     maxLines: maxLines,
     keyboardType: TextInputType.multiline,
+    textInputAction: textInputAction,
     decoration: InputDecoration(
       contentPadding: const EdgeInsets.all(20),
       filled: true,
