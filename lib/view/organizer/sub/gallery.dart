@@ -271,14 +271,16 @@ class _ViewGalleryState extends State<ViewGallery> {
         ),
       ),
       actions: [
-        GestureDetector(
-          onTap: () => Get.toNamed("/view-profile"),
-          child: Container(
-            padding: const EdgeInsets.all(10.0),
-            width: 56,
-            child: CircularProfileAvatar(_profileCtrl.profile["avatar"]),
-          ),
-        ),
+        _profileCtrl.profile["avatar"] != null
+            ? GestureDetector(
+                onTap: () => Get.toNamed("/view-profile"),
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  width: 56,
+                  child: CircularProfileAvatar(_profileCtrl.profile["avatar"]),
+                ),
+              )
+            : const SizedBox(),
       ],
     );
 

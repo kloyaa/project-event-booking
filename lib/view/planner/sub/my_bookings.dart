@@ -6,7 +6,6 @@ import 'package:app/controller/bookingController.dart';
 import 'package:app/controller/eventController.dart';
 import 'package:app/controller/profileController.dart';
 import 'package:app/controller/userController.dart';
-import 'package:app/view/billing/pay.dart';
 import 'package:app/widget/button.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
@@ -359,14 +358,16 @@ class _ViewPlannerBookingsState extends State<ViewPlannerBookings>
         ),
       ),
       actions: [
-        GestureDetector(
-          onTap: () => Get.toNamed("/view-profile"),
-          child: Container(
-            padding: const EdgeInsets.all(10.0),
-            width: 56,
-            child: CircularProfileAvatar(_profileCtrl.profile["avatar"]),
-          ),
-        ),
+        _profileCtrl.profile["avatar"] != null
+            ? GestureDetector(
+                onTap: () => Get.toNamed("/view-profile"),
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  width: 56,
+                  child: CircularProfileAvatar(_profileCtrl.profile["avatar"]),
+                ),
+              )
+            : const SizedBox(),
       ],
       bottom: TabBar(
         indicatorColor: kDark, //Default Color of Indicator

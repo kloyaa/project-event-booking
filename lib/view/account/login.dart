@@ -82,8 +82,8 @@ class _ViewLoginState extends State<ViewLogin> {
     // _emailCtrl.text = "planner@gmail.com";
     // _passwordCtrl.text = "password";
 
-    _emailCtrl.text = "organizer3@gmail.com";
-    _passwordCtrl.text = "password";
+    // _emailCtrl.text = "organizer3@gmail.com";
+    // _passwordCtrl.text = "password";
   }
 
   @override
@@ -188,7 +188,7 @@ class _ViewLoginState extends State<ViewLogin> {
                 btnColor: kLight,
                 labelColor: kDark,
                 label: "Don't have an account?",
-                function: () => Get.toNamed("/registration"),
+                function: () => Get.toNamed("/terms-and-agreement"),
               ),
             ],
           ),

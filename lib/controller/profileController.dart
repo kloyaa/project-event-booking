@@ -92,4 +92,13 @@ class ProfileController extends GetxController {
   Future<dynamic> deleteFromLinks(jsonData) async {
     await Dio().put("$baseUrl/profile/links/remove", data: jsonData);
   }
+
+  // *********** EVENT ORGANIZERS ***********
+  Future<dynamic> getEventOrganizers() async {
+    final response = await Dio().get("$baseUrl/profile/all", queryParameters: {
+      "role": "organizer",
+    });
+    formatPrint("getEventOrganizers", response.data);
+    return response.data;
+  }
 }

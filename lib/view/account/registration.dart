@@ -86,129 +86,133 @@ class _ViewRegistrationState extends State<ViewRegistration> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _emailCtrl.text = "customer@gmail.com";
-    _passwordCtrl.text = "password";
-    _passwordRepeatCtrl.text = "password";
+    // _emailCtrl.text = "customer@gmail.com";
+    // _passwordCtrl.text = "password";
+    // _passwordRepeatCtrl.text = "password";
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => destroyFormFocus(context),
-      child: Scaffold(
-        backgroundColor: kLight,
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Spacer(),
-              Text(
-                "ACCOUNT SIGN UP",
-                style: GoogleFonts.roboto(
-                  color: kDark,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          backgroundColor: kLight,
+          resizeToAvoidBottomInset: false,
+          body: Container(
+            padding:
+                const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Spacer(),
+                Text(
+                  "ACCOUNT SIGN UP",
+                  style: GoogleFonts.roboto(
+                    color: kDark,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                "Easy Event Booking in Lareservv",
-                style: GoogleFonts.roboto(
-                  color: kDark,
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w300,
+                Text(
+                  "Easy Event Booking in Lareservv",
+                  style: GoogleFonts.roboto(
+                    color: kDark,
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30.0),
-              inputTextField(
-                controller: _emailCtrl,
-                focusNode: _emailFocus,
-                color: kWhite,
-                labelText: "Email",
-                textFieldStyle: GoogleFonts.roboto(
-                  color: kDark,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12.0,
+                const SizedBox(height: 30.0),
+                inputTextField(
+                  controller: _emailCtrl,
+                  focusNode: _emailFocus,
+                  color: kWhite,
+                  labelText: "Email",
+                  textFieldStyle: GoogleFonts.roboto(
+                    color: kDark,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12.0,
+                  ),
+                  obscureText: false,
                 ),
-                obscureText: false,
-              ),
-              const SizedBox(height: 10.0),
-              inputTextField(
-                controller: _passwordCtrl,
-                focusNode: _passwordFocus,
-                color: kWhite,
-                labelText: "Password",
-                textFieldStyle: GoogleFonts.roboto(
-                  color: kDark,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12.0,
+                const SizedBox(height: 10.0),
+                inputTextField(
+                  controller: _passwordCtrl,
+                  focusNode: _passwordFocus,
+                  color: kWhite,
+                  labelText: "Password",
+                  textFieldStyle: GoogleFonts.roboto(
+                    color: kDark,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12.0,
+                  ),
+                  obscureText: true,
                 ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 10.0),
-              inputTextField(
-                controller: _passwordRepeatCtrl,
-                focusNode: _passwordRepeatFocus,
-                color: kWhite,
-                labelText: "Repeat Password",
-                textFieldStyle: GoogleFonts.roboto(
-                  color: kDark,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12.0,
+                const SizedBox(height: 10.0),
+                inputTextField(
+                  controller: _passwordRepeatCtrl,
+                  focusNode: _passwordRepeatFocus,
+                  color: kWhite,
+                  labelText: "Repeat Password",
+                  textFieldStyle: GoogleFonts.roboto(
+                    color: kDark,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12.0,
+                  ),
+                  obscureText: true,
                 ),
-                obscureText: true,
-              ),
-              errorRegistration
-                  ? GestureDetector(
-                      onTap: () => Get.toNamed("/login"),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: kDanger,
-                          borderRadius: kDefaultRadius,
-                        ),
-                        padding: const EdgeInsets.all(20.0),
-                        margin: const EdgeInsets.only(top: 25.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              AntDesign.warning,
-                              color: kWhite,
-                              size: 26.0,
-                            ),
-                            const SizedBox(width: 10.0),
-                            Expanded(
-                              child: Text(
-                                "The email you entered is already connected\nto an account. Login to Lareservv account.",
-                                style: GoogleFonts.roboto(
-                                  color: kWhite,
-                                  fontSize: 10.0,
-                                  fontWeight: FontWeight.w400,
+                errorRegistration
+                    ? GestureDetector(
+                        onTap: () => Get.toNamed("/login"),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: kDanger,
+                            borderRadius: kDefaultRadius,
+                          ),
+                          padding: const EdgeInsets.all(20.0),
+                          margin: const EdgeInsets.only(top: 25.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                AntDesign.warning,
+                                color: kWhite,
+                                size: 26.0,
+                              ),
+                              const SizedBox(width: 10.0),
+                              Expanded(
+                                child: Text(
+                                  "The email you entered is already connected\nto an account. Login to Lareservv account.",
+                                  style: GoogleFonts.roboto(
+                                    color: kWhite,
+                                    fontSize: 10.0,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  : const SizedBox(),
-              const Spacer(flex: 5),
-              elevatedButton(
-                btnColor: kDark,
-                labelColor: kWhite,
-                label: "SIGN UP",
-                function: () async => await _register(),
-              ),
-              const SizedBox(height: 10.0),
-              elevatedButton(
-                btnColor: kLight,
-                labelColor: kDark,
-                label: "Already registered?",
-                function: () => Get.toNamed("/login"),
-              ),
-            ],
+                      )
+                    : const SizedBox(),
+                const Spacer(flex: 5),
+                elevatedButton(
+                  btnColor: kDark,
+                  labelColor: kWhite,
+                  label: "SIGN UP",
+                  function: () async => await _register(),
+                ),
+                const SizedBox(height: 10.0),
+                elevatedButton(
+                  btnColor: kLight,
+                  labelColor: kDark,
+                  label: "Already registered?",
+                  function: () => Get.toNamed("/login"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

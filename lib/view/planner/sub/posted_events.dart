@@ -2,8 +2,10 @@ import 'package:app/common/format_currency.dart';
 import 'package:app/const/colors.dart';
 import 'package:app/const/material.dart';
 import 'package:app/controller/eventController.dart';
+import 'package:app/controller/profileController.dart';
 import 'package:app/widget/dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -20,6 +22,8 @@ class ViewPostedEvents extends StatefulWidget {
 
 class _ViewPostedEventsState extends State<ViewPostedEvents> {
   final _eventCtrl = Get.put(EventController());
+  final _profileCtrl = Get.put(ProfileController());
+
   late Future _events;
 
   List<Widget> images(images) {
@@ -70,6 +74,18 @@ class _ViewPostedEventsState extends State<ViewPostedEvents> {
           fontWeight: FontWeight.bold,
         ),
       ),
+      actions: [
+        _profileCtrl.profile["avatar"] != null
+            ? GestureDetector(
+                onTap: () => Get.toNamed("/view-profile"),
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  width: 56,
+                  child: CircularProfileAvatar(_profileCtrl.profile["avatar"]),
+                ),
+              )
+            : const SizedBox(),
+      ],
     );
 
     return Scaffold(

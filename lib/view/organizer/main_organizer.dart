@@ -156,21 +156,21 @@ class _ViewOrganizerMainState extends State<ViewOrganizerMain> {
               ),
             ),
           ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(
-              AntDesign.mail,
-              size: 20.0,
-              color: kDark,
-            ),
-            title: Text(
-              "Inbox",
-              style: GoogleFonts.roboto(
-                fontSize: 12.0,
-                color: kDark,
-              ),
-            ),
-          ),
+          // ListTile(
+          //   onTap: () {},
+          //   leading: const Icon(
+          //     AntDesign.mail,
+          //     size: 20.0,
+          //     color: kDark,
+          //   ),
+          //   title: Text(
+          //     "Inbox",
+          //     style: GoogleFonts.roboto(
+          //       fontSize: 12.0,
+          //       color: kDark,
+          //     ),
+          //   ),
+          // ),
           const Spacer(),
           const Divider(),
           const Spacer(flex: 5),

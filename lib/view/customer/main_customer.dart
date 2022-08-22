@@ -6,6 +6,7 @@ import 'package:app/controller/eventController.dart';
 import 'package:app/controller/profileController.dart';
 import 'package:app/controller/userController.dart';
 import 'package:app/services/open_map.dart';
+import 'package:app/view/common/oraganizer_list.dart';
 import 'package:app/widget/button.dart';
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -503,6 +504,8 @@ class _ViewCustomerMainState extends State<ViewCustomerMain> {
               ),
             ),
           ),
+          const Divider(),
+          const Spacer(),
           ListTile(
             onTap: () => Get.toNamed("/view-customer-bookings"),
             leading: const Icon(
@@ -533,23 +536,39 @@ class _ViewCustomerMainState extends State<ViewCustomerMain> {
               ),
             ),
           ),
+          // ListTile(
+          //   onTap: () {},
+          //   leading: const Icon(
+          //     AntDesign.mail,
+          //     size: 20.0,
+          //     color: kDark,
+          //   ),
+          //   title: Text(
+          //     "Inbox",
+          //     style: GoogleFonts.roboto(
+          //       fontSize: 12.0,
+          //       color: kDark,
+          //     ),
+          //   ),
+          // ),
+          const Spacer(),
+          const Divider(),
+          const Spacer(flex: 5),
           ListTile(
-            onTap: () {},
+            onTap: () => Get.to(() => const ViewOrganizerList()),
             leading: const Icon(
-              AntDesign.mail,
+              Entypo.tools,
               size: 20.0,
               color: kDark,
             ),
             title: Text(
-              "Inbox",
+              "Event Organizers",
               style: GoogleFonts.roboto(
                 fontSize: 12.0,
                 color: kDark,
               ),
             ),
           ),
-          const Spacer(flex: 5),
-
           ListTile(
             onTap: () => _userCtrl.logout(),
             leading: Icon(

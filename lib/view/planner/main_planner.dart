@@ -2,6 +2,7 @@ import 'package:app/const/colors.dart';
 import 'package:app/controller/eventController.dart';
 import 'package:app/controller/profileController.dart';
 import 'package:app/controller/userController.dart';
+import 'package:app/view/common/oraganizer_list.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -179,23 +180,37 @@ class _ViewPlannerMainState extends State<ViewPlannerMain> {
           ),
           const Spacer(),
           const Divider(),
+          // ListTile(
+          //   onTap: () {},
+          //   leading: const Icon(
+          //     AntDesign.mail,
+          //     size: 20.0,
+          //     color: kDark,
+          //   ),
+          //   title: Text(
+          //     "Inbox",
+          //     style: GoogleFonts.roboto(
+          //       fontSize: 12.0,
+          //       color: kDark,
+          //     ),
+          //   ),
+          // ),
+          const Spacer(flex: 5),
           ListTile(
-            onTap: () {},
+            onTap: () => Get.to(() => const ViewOrganizerList()),
             leading: const Icon(
-              AntDesign.mail,
+              Entypo.tools,
               size: 20.0,
               color: kDark,
             ),
             title: Text(
-              "Inbox",
+              "Event Organizers",
               style: GoogleFonts.roboto(
                 fontSize: 12.0,
                 color: kDark,
               ),
             ),
           ),
-          const Spacer(flex: 5),
-
           ListTile(
             onTap: () => _userCtrl.logout(),
             leading: Icon(

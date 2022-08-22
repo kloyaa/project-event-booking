@@ -16,6 +16,7 @@ import 'package:app/view/planner/sub/my_bookings.dart';
 import 'package:app/view/planner/sub/posted_events.dart';
 import 'package:app/view/profile/create_profile.dart';
 import 'package:app/view/profile/view_profile.dart';
+import 'package:app/view/terms_and_agreement.dart';
 import 'package:app/view/txn_successfull.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/loading",
           page: () => const Loading(),
+        ),
+        GetPage(
+          name: "/terms-and-agreement",
+          page: () => const TermsAndAgreement(),
         ),
         GetPage(
           name: "/login",
@@ -102,7 +107,8 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/view-gallery",
           page: () => const ViewGallery(),
-        ),   GetPage(
+        ),
+        GetPage(
           name: "/view-photo-preview",
           page: () => const ViewGalleryPreview(),
         ),
